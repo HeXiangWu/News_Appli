@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/full_screen"
+        app:showAsAction="always"
+        android:title="全屏"
+        android:icon="@drawable/ic_full_screen"/>
+
+    <item android:id="@+id/email"
+        app:showAsAction="always"
+        android:title="邮箱"
+        android:icon="@drawable/ic_email"
+        />
+</menu>
