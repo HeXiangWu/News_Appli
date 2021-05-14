@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/news_fresh"
+        android:id="@+id/news_swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,6 +16,5 @@
 
         </androidx.recyclerview.widget.RecyclerView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
 </LinearLayout>

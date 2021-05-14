@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_home"
-        android:title="首页"
-        android:icon="@drawable/ic_home">
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/title_home" />
 
-    </item>
     <item
-        android:id="@+id/nav_test_1"
-        android:title="test_1"
-        android:icon="@drawable/ic_user">
+        android:id="@+id/video"
+        android:icon="@drawable/ic_video"
+        android:title="@string/title_video" />
 
-    </item>
     <item
-        android:id="@+id/nav_test_2"
-        android:title="test_2"
-        android:icon="@drawable/ic_video">
+        android:id="@+id/user"
+        android:icon="@drawable/ic_user"
+        android:title="@string/title_user" />
 
-    </item>
 </menu>

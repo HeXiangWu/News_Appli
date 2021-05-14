@@ -1,33 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
-    <com.example.myapp.custom.NoScrollViewPager
-        android:id="@+id/content_view_pager"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_container"
         android:layout_width="match_parent"
-        android:layout_marginBottom="50dp"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    </com.example.myapp.custom.NoScrollViewPager>
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        app:elevation="0dp"
-        app:labelVisibilityMode="labeled"
-        android:id="@+id/bottom_nav"
+        app:itemRippleColor="@color/transparent"
+        android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_menu">
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav_menu" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#A6A6A6" />
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-
-</RelativeLayout>
+</LinearLayout>
