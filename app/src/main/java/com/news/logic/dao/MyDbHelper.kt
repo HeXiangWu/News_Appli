@@ -10,20 +10,20 @@ import java.sql.SQLException
 
 class MyDbHelper  //创建数据库
     (context: Context) :
-    OrmLiteSqliteOpenHelper(context, "new", null, 1) {
+    OrmLiteSqliteOpenHelper(context, "news", null, 1) {
 
     companion object {
-        private const val NAME = "new.db"
+        private const val DB_NAME = "news_table.db"
+        private var instance: AppDatabase? = null
     }
+
 
     override fun onCreate(database: SQLiteDatabase, connectionSource: ConnectionSource) {
         //创建表
-        if (database == null){
-            try {
-                TableUtils.createTable(connectionSource, NewInfo::class.java)
-            } catch (e: SQLException) {
-                e.printStackTrace()
-            }
+        try {
+            TableUtils.createTable(connectionSource, NewInfo::class.java)
+        } catch (e: SQLException) {
+            e.printStackTrace()
         }
     }
 
@@ -33,9 +33,8 @@ class MyDbHelper  //创建数据库
         oldVersion: Int,
         newVersion: Int
     ) {
+
     }
-
-
 }
 
 

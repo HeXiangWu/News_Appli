@@ -58,7 +58,10 @@ class HomeFragment : Fragment() {
             false
         }
         // 设置头像点击事件
-        binding.avatar.setOnClickListener { "你点击了头像".showToast() }
+        binding.avatar.setOnClickListener {
+
+            "你点击了头像".showToast()
+        }
         // 设置home页面的搜索框不可编辑
         binding.homeEditText.keyListener = null
         // 设置home页面的搜索框的点击事件: 打开SearchActivity这个页面，即搜索页面

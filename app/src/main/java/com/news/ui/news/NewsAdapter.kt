@@ -112,10 +112,10 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
             // (4)列表项点击事件  title和description点击完变灰
             holder.itemView.setOnClickListener {
                 // holder.adapterPosition 当前点击的新闻在newsList中的下标
-                var currentNews = currentList[holder.absoluteAdapterPosition]
+                val currentNews = currentList[holder.absoluteAdapterPosition]
                 //使用数据库保存
-                var myDbHelper = MyDbHelper(context)
-                var dao: Dao<NewInfo, Int>
+                val myDbHelper = MyDbHelper(context)
+                val dao: Dao<NewInfo, Int>?
                 try {
                     dao = myDbHelper.getDao(NewInfo::class.java)
                     var list: List<NewInfo> = dao.queryForEq("newsId", news.id)
@@ -169,17 +169,18 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
         }
     }
 
-//查询当前新闻是否已被点击
-    private var myDbHelper: MyDbHelper? = null
-    var dao: Dao<NewInfo, Int>? = null
+    //查询当前新闻是否已被点击
+    var myDbHelper: MyDbHelper? = null
+    var dao: Dao<NewInfo,Int>? = null
+
+    @Throws(SQLException::class)
     private fun queryIdInDb(id: Long): Boolean {
         if (myDbHelper == null) {
             myDbHelper = MyDbHelper(context)
             dao = myDbHelper!!.getDao(NewInfo::class.java)
         }
-        val list: List<NewInfo> = dao!!.queryForEq("newsId", id)
-        return list.isNotEmpty()//返回是否被点击过
-
+        val list: List<NewInfo> = dao?.queryForEq("newsId", id) as List<NewInfo>
+        return !(list.isEmpty())
     }
 
     // 列表项基类

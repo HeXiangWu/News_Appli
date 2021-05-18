@@ -1,13 +1,23 @@
 package com.news.ui
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.os.Build
+import android.os.Build.VERSION
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import com.news.R
 import com.news.databinding.ActivityMainBinding
 import com.news.util.LogUtil
 import com.news.util.setupWithNavController
+import com.news.util.showToast
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,11 +26,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //通知
+
+
         LogUtil.e(TAG, "onCreate: ")
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
@@ -53,4 +68,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val TAG = "MainActivity"
     }
+
+
 }

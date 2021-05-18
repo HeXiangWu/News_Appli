@@ -12,6 +12,7 @@ import kotlin.coroutines.suspendCoroutine
 object NewsNetwork {
     // 通用的网络请求方法封装，方便.await()
     private suspend fun <T> Call<T>.await(): T {
+        //返回值是Call类型的Retrofit网络请求接口 可直接调用await
         return suspendCoroutine { continuation ->
             enqueue(object : Callback<T> {
                 // 成功
