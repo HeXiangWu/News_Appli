@@ -22,6 +22,7 @@ import com.news.ui.news.NewsViewModel.Companion.ERROR_STATUS
 import com.news.ui.news.NewsViewModel.Companion.FINISHED_STATUS
 import com.news.ui.news.NewsViewModel.Companion.LOADING_STATUS
 import java.sql.SQLException
+import kotlin.concurrent.thread
 
 class NewsAdapter(private val viewModel: NewsViewModel) :
 
@@ -133,16 +134,18 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
                     currentNews.url,
                     currentNews.author_name
                 )
-                //判断列表内容是否被点击过
-                var isExist = false
-                try {
-                    isExist = queryIdInDb(news.id)
-                } catch (e: SQLException) {
-                    e.printStackTrace()
+                thread {
+                    //判断列表内容是否被点击过
+                    var isExist = false
+                    try {
+                        isExist = queryIdInDb(news.id)
+                    } catch (e: SQLException) {
+                        e.printStackTrace()
+                    }
+                    //对描述标题 判断存在反馈颜色变灰
+                    holder.description.setTextColor(if (isExist) Color.GRAY else Color.BLACK)
+                    holder.title.setTextColor(if (isExist) Color.GRAY else Color.BLACK)
                 }
-                //对描述标题 判断存在反馈颜色变灰
-                holder.description.setTextColor(if (isExist) Color.GRAY else Color.BLACK)
-                holder.title.setTextColor(if (isExist) Color.GRAY else Color.BLACK)
             }
         } else {
             // 其它情况只会是 FooterViewHolder
@@ -171,7 +174,7 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
 
     //查询当前新闻是否已被点击
     var myDbHelper: MyDbHelper? = null
-    var dao: Dao<NewInfo,Int>? = null
+    var dao: Dao<NewInfo, Int>? = null
 
     @Throws(SQLException::class)
     private fun queryIdInDb(id: Long): Boolean {
