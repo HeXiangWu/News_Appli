@@ -14,6 +14,7 @@ import com.news.R
 import com.news.databinding.FragmentHomeBinding
 import com.news.ui.news.NewsFragment
 import com.news.ui.search.SearchActivity
+import com.news.ui.user.UserNavigationView
 import com.news.util.showToast
 
 class HomeFragment : Fragment() {
@@ -58,9 +59,10 @@ class HomeFragment : Fragment() {
             false
         }
         // 设置头像点击事件
-        binding.avatar.setOnClickListener {
 
-            "你点击了头像".showToast()
+        binding.avatar.setOnClickListener {
+            UserNavigationView.actionStart(NewsApplication.context)
+
         }
         // 设置home页面的搜索框不可编辑
         binding.homeEditText.keyListener = null

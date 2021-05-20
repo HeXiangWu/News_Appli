@@ -30,6 +30,8 @@
         <activity
             android:name="com.news.ui.search.SearchActivity"
             android:exported="true" />
+        <activity android:name=".ui.user.UserNavigationView"
+            android:exported="true"/>
         <activity
             android:name="com.news.ui.MainActivity"
             android:exported="true">
