@@ -99,6 +99,19 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
             holder.description.text =
                 context.getString(R.string.news_desc, news.author_name, news.date)
             // (3)加载新闻图片
+            thread {
+                //判断列表内容是否已经被点击过
+                var isExist = false
+                try {
+                    isExist = queryIdInDb(news.id)
+                } catch (e: SQLException) {
+                    e.printStackTrace()
+                }
+                //对描述标题 判断存在反馈颜色变灰
+                holder.description.setTextColor(if (isExist) Color.GRAY else Color.BLACK)
+                holder.title.setTextColor(if (isExist) Color.GRAY else Color.BLACK)
+            }
+
             when (holder) {
                 is OneImageViewHolder -> {
                     Glide.with(context).load(news.thumbnail_pic_s).into(holder.image)
@@ -183,7 +196,7 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
             dao = myDbHelper!!.getDao(NewInfo::class.java)
         }
         val list: List<NewInfo> = dao?.queryForEq("newsId", id) as List<NewInfo>
-        return !(list.isEmpty())
+        return list.isNotEmpty()
     }
 
     // 列表项基类
