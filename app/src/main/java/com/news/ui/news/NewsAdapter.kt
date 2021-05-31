@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.j256.ormlite.dao.Dao
-import com.news.NewsApplication
+import com.makeramen.roundedimageview.RoundedImageView
 import com.news.NewsApplication.Companion.context
 import com.news.R
 import com.news.logic.commonsdk.ThreadPoolManager
@@ -23,7 +23,7 @@ import com.news.ui.news.NewsViewModel.Companion.ERROR_STATUS
 import com.news.ui.news.NewsViewModel.Companion.FINISHED_STATUS
 import com.news.ui.news.NewsViewModel.Companion.LOADING_STATUS
 import java.sql.SQLException
-import kotlin.concurrent.thread
+
 
 class NewsAdapter(private val viewModel: NewsViewModel) :
 
@@ -40,6 +40,9 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
      * onBindViewHolder函数会根据footerViewStatus的不同取值绘制不同的UI
      */
     var footerViewStatus: Int = LOADING_STATUS
+
+    var maxim = currentList.size / 6 + 1
+    var minim = (currentList.size - 1) / 6
 
     // super.getItemCount() 只是 list.size , 要加上 footer_view
     override fun getItemCount(): Int = super.getItemCount() + 1
@@ -90,8 +93,7 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
 
     // 将数据展示在列表项中,即绘制列表项的 UI
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        val context = NewsApplication.context
-
+        val context = context
         if (holder is NewsViewHolder) {
             val news = currentList[position]
             // (1)显示新闻标题
@@ -100,7 +102,7 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
             holder.description.text =
                 context.getString(R.string.news_desc, news.author_name, news.date)
             // (3)加载新闻图片
-            fun colorchange() {
+            fun coloring() {
                 var isExist = false
                 try {
                     isExist = queryIdInDb(news.id)
@@ -112,7 +114,7 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
                 holder.title.setTextColor(if (isExist) Color.GRAY else Color.BLACK)
             }
             ThreadPoolManager.instance?.execute(kotlinx.coroutines.Runnable {
-                colorchange()
+                coloring()
             })
 
             when (holder) {
@@ -133,26 +135,19 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
                 //使用数据库保存
                 val myDbHelper = MyDbHelper(context)
                 val dao: Dao<NewInfo, Int>? = myDbHelper.getDao(NewInfo::class.java)
-                val max_num = currentList.size / 6 + 1
-                val min_num = max_num - 1
-
-                try {
-                    ThreadPoolManager.instance?.execute(kotlinx.coroutines.Runnable {
-//                        var list = dao?.queryBuilder()?.limit(max_num.toLong())?.limit(min_num.toLong())?.where()?.eq("newsId", news.id)
-                        var list = dao?.queryForEq("newsId", news.id)
-                        if (list != null) {
-                            if (list.isEmpty()) {
-                                dao?.create(NewInfo(news.id.toInt())) //执行insert语句
-                            }
+                ThreadPoolManager.instance?.execute(kotlinx.coroutines.Runnable {
+                    var list =
+                        dao?.queryBuilder()?.limit(minim.toLong())?.limit(maxim.toLong())?.where()
+                            ?.eq("newsId", news.id)?.query()
+                    if (list != null) {
+//                    dao?.createIfNotExists(NewInfo(news.id.toInt())) crash?
+                        if (list.isEmpty()) {
+                            dao?.create(NewInfo(news.id.toInt())) //执行insert语句
                         }
-                    })
-                    notifyDataSetChanged()
-
-                    //更新点击过数据
-                } catch (e: SQLException) {
-                    e.printStackTrace()
-                }
-
+                    }
+                })
+                notifyDataSetChanged()
+                //更新点击过数据
                 DetailActivity.actionStart(
                     context,
                     currentNews.url,
@@ -187,18 +182,20 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
     //查询当前新闻是否已被点击
     var myDbHelper: MyDbHelper? = null
     var dao: Dao<NewInfo, Int>? = null
-    var max_num = currentList.size / 6 + 1
-    var min_num = currentList.size / 6 - 1
+
 
     @Throws(SQLException::class)
     private fun queryIdInDb(id: Long): Boolean {
+
         if (myDbHelper == null) {
             myDbHelper = MyDbHelper(context)
             dao = myDbHelper!!.getDao(NewInfo::class.java)
         }
-        val list = dao?.queryForEq("newsId", id)
-//        var list = dao?.queryBuilder()?.limit(max_num.toLong())?.limit(min_num.toLong())?.where()?.eq("newsId", id)
-        return list?.isNotEmpty() == true
+//        val list = dao?.queryForEq("newsId", id)
+        var list = dao?.queryBuilder()?.limit(minim.toLong())?.limit(maxim.toLong())?.where()
+            ?.eq("newsId", id)?.query()
+
+        return !(list == null || list.size == 0)
     }
 
     // 列表项基类
@@ -218,17 +215,17 @@ class NewsAdapter(private val viewModel: NewsViewModel) :
 
     // 只有一张图片的新闻列表项
     inner class OneImageViewHolder(itemView: View) : NewsViewHolder(itemView) {
-        val image: com.makeramen.roundedimageview.RoundedImageView =
+        val image: RoundedImageView =
             itemView.findViewById(R.id.news_image)
     }
 
     // 有三张图片的新闻列表项
     inner class ThreeImagesViewHolder(itemView: View) : NewsViewHolder(itemView) {
-        val image1: com.makeramen.roundedimageview.RoundedImageView =
+        val image1: RoundedImageView =
             itemView.findViewById(R.id.news_image_1)
-        val image2: com.makeramen.roundedimageview.RoundedImageView =
+        val image2: RoundedImageView =
             itemView.findViewById(R.id.news_image_2)
-        val image3: com.makeramen.roundedimageview.RoundedImageView =
+        val image3: RoundedImageView =
             itemView.findViewById(R.id.news_image_3)
     }
 
