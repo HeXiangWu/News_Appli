@@ -7,17 +7,22 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import com.news.R
 import com.news.databinding.ActivitySearchBinding
 import com.news.ui.MainActivity
-import com.news.ui.home.HomeFragment
 import com.news.util.showToast
 
+
 class SearchActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySearchBinding
+
     companion object {
         @JvmStatic
         fun actionStart(context: Context) {
@@ -26,8 +31,6 @@ class SearchActivity : AppCompatActivity() {
             context.startActivity(intent)
         }
     }
-
-    private lateinit var binding: ActivitySearchBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +48,14 @@ class SearchActivity : AppCompatActivity() {
 
         // "取消"的点击事件：销毁本活动，返回上一级
         binding.searchCancelButton.setOnClickListener {
-            val intent = Intent(this,MainActivity::class.java)
-            val pi = PendingIntent.getActivity(this,0,intent,0)
+            val intent = Intent(this, MainActivity::class.java)
+            val pi = PendingIntent.getActivity(this, 0, intent, 0)
             val notification = NotificationCompat.Builder(this, "normal")
                 .setContentTitle("头条")
-//                .setContentText("老楼掉下水泥块，天花板露出钢筋")
-                .setStyle(NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(resources,R.drawable.app_icon)))
+                .setStyle(
+                    NotificationCompat.BigPictureStyle()
+                        .bigPicture(BitmapFactory.decodeResource(resources, R.drawable.app_icon))
+                )
                 .setSmallIcon(R.drawable.app_icon)
                 .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.appli_icon))
                 .setAutoCancel(true)

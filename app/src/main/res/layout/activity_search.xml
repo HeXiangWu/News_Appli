@@ -19,10 +19,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!--android:layout_centerVertical="true"        相对于父布局中垂直方向居中-->
-                <!--android:layout_marginRight="10dp"           右边的外边距设置为 10 dp-->
-                <!--android:layout_toLeftOf="@+id/search_cancel_button" 让搜索框处于TextView(即"取消")的左边-->
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
@@ -46,12 +42,6 @@
                             android:layout_centerVertical="true"
                             android:src="@drawable/ic_search" />
 
-                        <!--android:layout_centerVertical="true"            相对于父布局中垂直方向居中-->
-                        <!--android:layout_toRightOf="@+id/icon_search"      设置编辑框的位置为放大镜图标的右边-->
-                        <!--android:cursorVisible="true"                    设置光标可见-->
-                        <!--android:textCursorDrawable="@drawable/text_cursor_drawable" 设置光标的形状-->
-                        <!--android:imeOptions="actionSearch"               将回车键变成搜索键-->
-                        <!--android:singleLine="true"                       只允许输入单行文本-->
                         <EditText
                             android:id="@+id/search_edit_text"
                             android:layout_width="match_parent"
@@ -69,11 +59,6 @@
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
-
-                <!--android:layout_alignParentRight="true"  与父布局的右边对齐  -->
-                <!--android:layout_centerVertical="true"    相对于父布局中垂直方向居中  -->
-                <!--android:layout_marginRight="10dp"       右边距-->
-                <!--android:gravity="center"                让TextView里面的文字处于TextView的正中心-->
                 <TextView
                     android:id="@+id/search_cancel_button"
                     android:layout_width="40dp"
@@ -86,10 +71,196 @@
 
 
             </RelativeLayout>
-
-
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="搜索历史"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+        <com.news.ui.search.FlowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:layout_margin="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="坎特伯雷公主与骑士唤醒冠军之剑的奇妙冒险" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="儿童洗衣机" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="洗衣机全自动" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="小度" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="儿童汽车可坐人" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="抽真空收纳袋" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="儿童滑板车" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="稳压器 电容" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="羊奶粉" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="奶粉1段" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="图书勋章日" />
+        </com.news.ui.search.FlowLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="搜索发现"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+        <com.news.ui.search.FlowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="惠氏3段" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="奶粉2段" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="图书勋章日" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="伯爵茶" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="阿迪5折秒杀" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="蓝胖子" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="婴儿洗衣机" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="小度在家" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="遥控车可坐" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="搬家袋" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="剪刀车" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="滑板车儿童" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="空调风扇" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="空鼓锤" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_shape"
+                android:text="笔记本电脑" />
+        </com.news.ui.search.FlowLayout>
+    </LinearLayout>
 </LinearLayout>
